@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/header.css') }}" />
+    <style>
+      body {
+        background-color: #121212;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main {
+        padding: 20px 0;
+        margin-bottom: 30px;
+      }
+
+      .navigation {
+        background-color: #1e1e1e;
+        border-bottom: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+        padding: 15px 30px;
+        text-align: center;
+      }
+
+      .navigation h2 {
+        font-family: 'Orbitron', sans-serif;
+        margin: 0;
+      }
+
+      .navigation h2 a {
+        color: #c2fbd7;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .navigation h2 a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(194, 251, 215, 0.5);
+      }
+
+      .card {
+        background-color: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 30px rgba(194, 251, 215, 0.2);
+        border-color: #c2fbd7;
+        transition: all 0.3s ease;
+      }
+
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #2a2a2a;
+      }
+
+      .table {
+        color: #ffffff;
+        margin-bottom: 30px;
+      }
+
+      .table thead th {
+        background-color: #2a2a2a;
+        border-color: #2a2a2a;
+        color: #c2fbd7;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        padding: 15px;
+      }
+
+      .table td {
+        border-color: #2a2a2a;
+        padding: 15px;
+        vertical-align: middle;
+      }
+
+      .table tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      .table tbody tr:hover {
+        background-color: rgba(194, 251, 215, 0.05);
+      }
+
+      .savings-highlight {
+        background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(194, 251, 215, 0.1));
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid rgba(76, 175, 80, 0.2);
+        margin: 20px;
+        text-align: center;
+        animation: glowPulse 2s infinite;
+      }
+
+      @keyframes glowPulse {
+        0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.2); }
+        50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.4); }
+        100% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.2); }
+      }
+
+      .discount-applied {
+        display: inline-block;
+        background: rgba(76, 175, 80, 0.15);
+        color: #4CAF50;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+        margin: 10px 0;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      .price-change {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin: 10px 0;
+      }
+
+      .old-price {
+        color: #888;
+        text-decoration: line-through;
+        font-size: 1.2em;
+      }
+
+      .new-price {
+        color: #4CAF50;
+        font-size: 1.4em;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .saving-message {
+        color: #c2fbd7;
+        font-size: 1.2em;
+        margin-top: 10px;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .discount-explanation {
+        font-size: 0.9em;
+        color: #888;
+        margin-top: 5px;
+      }
+
+      .original-subtotal {
+        text-decoration: line-through;
+        color: #888;
+        font-size: 0.9em;
+        margin-right: 8px;
+      }
+
+      .discounted {
+        color: #4CAF50;
+        font-weight: 500;
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .savings-info {
+        background: rgba(194, 251, 215, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        border: 1px solid #2a2a2a;
+        transition: all 0.3s ease;
+      }
+
+      .savings-info:hover {
+        background: rgba(194, 251, 215, 0.1);
+        border-color: #c2fbd7;
+        transform: translateY(-2px);
+      }
+
+      .total-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        padding: 20px;
+      }
+
+      .button-33 {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                   rgba(44, 187, 99, .15) 0 1px 2px,
+                   rgba(44, 187, 99, .15) 0 2px 4px,
+                   rgba(44, 187, 99, .15) 0 4px 8px,
+                   rgba(44, 187, 99, .15) 0 8px 16px,
+                   rgba(44, 187, 99, .15) 0 16px 32px;
+        color: #006400;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        padding: 12px 30px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        font-weight: 500;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-33:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                   rgba(44,187,99,.25) 0 1px 2px,
+                   rgba(44,187,99,.25) 0 2px 4px,
+                   rgba(44,187,99,.25) 0 4px 8px,
+                   rgba(44,187,99,.25) 0 8px 16px,
+                   rgba(44,187,99,.25) 0 16px 32px,
+                   0 0 20px rgba(194, 251, 215, 0.4);
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .savings-amount {
+        color: #4CAF50;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .discount-badge {
+        background: rgba(76, 175, 80, 0.1);
+        color: #4CAF50;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.8em;
+        margin-left: 8px;
+        border: 1px solid rgba(76, 175, 80, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .navigation {
+          padding: 15px;
+        }
+        
+        h1 {
+          font-size: 1.5rem;
+          padding: 15px;
+        }
+        
+        .table thead th,
+        .table td {
+          padding: 10px;
+        }
+        
+        .savings-info {
+          margin: 10px;
+          padding: 15px;
+          text-align: center;
+        }
+        
+        .total-section {
+          align-items: center;
+        }
+        
+        .button-33 {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+        
+        .price-change {
+          flex-direction: column;
+          gap: 5px;
+        }
+        
+        .saving-message {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="navigation">
+        <h2><a href="/">GreenTree</a></h2>
+      </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <div class="card shadow-lg p-3 mb-5 rounded">
+        <div class="row g-0">
+          <div class="col-md-12">
+            <h1>Order Details (ID: #{{order.id}})</h1>
+
+            {% if order.discount_code %}
+            <div class="savings-highlight">
+                <div class="discount-applied">
+                    ECOMART25 APPLIED SUCCESSFULLY! 🎉
+                </div>
+                <div class="price-change">
+                    <span class="old-price">${{ "%.2f"|format(ns.original_total) }}</span>
+                    <span class="new-price">${{ "%.2f"|format(ns.discounted_total) }}</span>
+                </div>
+                <div class="saving-message">
+                    You're saving ${{ "%.2f"|format(ns.original_total - ns.discounted_total) }} today!
+                </div>
+                <div class="discount-explanation">
+                    25% discount has been applied to your order
+                </div>
+            </div>
+            {% endif %}
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items">
+                {% if cart_items %}
+                {% set ns = namespace(original_total=0, discounted_total=0) %}
+                {% for item in items %}
+                    {% set original_subtotal = item.amount|float * item.quantity %}
+                    {% set ns.original_total = ns.original_total + original_subtotal %}
+                    {% set discounted_subtotal = original_subtotal * 0.75 %}
+                    {% set ns.discounted_total = ns.discounted_total + discounted_subtotal %}
+                    
+                    <tr>
+                        <td>{{ item.product_name }}</td>
+                        <td>${{ "%.2f"|format(item.amount|float) }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>
+                            {% if order.discount_code %}
+                            <span class="original-subtotal">${{ "%.2f"|format(original_subtotal) }}</span>
+                            <span class="discounted">${{ "%.2f"|format(discounted_subtotal) }}</span>
+                            {% else %}
+                            ${{ "%.2f"|format(original_subtotal) }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Your cart is empty.</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+
+            {% if cart_items %}
+            <div class="savings-info">
+                <div class="total-section">
+                    {% if order.discount_code %}
+                    <h4>
+                        <span class="original-price">Original Total: ${{ "%.2f"|format(ns.original_total) }}</span>
+                        <span class="discount-badge">25% OFF</span>
+                    </h4>
+                    <h4 id="total-amount">Final Total: ${{ "%.2f"|format(ns.discounted_total) }}</h4>
+                    <h4 class="savings-amount">
+                        You Saved: ${{ "%.2f"|format(ns.original_total - ns.discounted_total) }}! 🎉
+                    </h4>
+                    {% else %}
+                    <h4 id="total-amount">Total: ${{ "%.2f"|format(ns.discounted_total) }}</h4>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-end align-items-center p-3">
+                <button class="button-33" onclick="location.href='/orders/{{user_id}}'">
+                  Go to Orders
+              </button>
+          </div>
+          {% else %}
+          <div class="d-flex justify-content-end align-items-center p-3">
+              <button class="button-33" onclick="location.href='/home'">
+                  Let's Shop
+              </button>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Calculate discounts and update totals
+    document.addEventListener('DOMContentLoaded', function() {
+      const discountCode = "{{ order.discount_code }}";
+      if (discountCode === "ECOMART25") {
+        // Update subtotals with discount
+        const originalTotals = document.querySelectorAll('.original-subtotal');
+        originalTotals.forEach(total => {
+          const originalValue = parseFloat(total.textContent.replace('$', ''));
+          const discountedValue = originalValue * 0.75; // 25% off
+          total.nextElementSibling.textContent = `$${discountedValue.toFixed(2)}`;
+        });
+
+        // Calculate and update final totals
+        let originalSum = 0;
+        let discountedSum = 0;
+        originalTotals.forEach(total => {
+          const originalValue = parseFloat(total.textContent.replace('$', ''));
+          originalSum += originalValue;
+          discountedSum += originalValue * 0.75;
+        });
+
+        // Update total display
+        document.querySelector('.old-price').textContent = `$${originalSum.toFixed(2)}`;
+        document.querySelector('.new-price').textContent = `$${discountedSum.toFixed(2)}`;
+        document.querySelector('.saving-message').textContent = 
+          `You're saving $${(originalSum - discountedSum).toFixed(2)} today!`;
+      }
+    });
+
+    // Format all currency values to 2 decimal places
+    document.addEventListener('DOMContentLoaded', function() {
+      const currencyElements = document.querySelectorAll('[class*="price"], [class*="total"]');
+      currencyElements.forEach(element => {
+        const value = element.textContent;
+        if (value.includes('$')) {
+          const number = parseFloat(value.replace('$', ''));
+          if (!isNaN(number)) {
+            element.textContent = value.replace(number, number.toFixed(2));
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

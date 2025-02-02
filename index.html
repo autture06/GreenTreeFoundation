@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GT Foundation</title>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #1e1e1e;
+            border-bottom: 1px solid #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .navigation h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            color: #c2fbd7;
+            margin: 0;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        }
+
+        .searchC {
+            padding: 12px 20px;
+            border: 2px solid #2a2a2a;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-radius: 10px;
+            font-size: 15px;
+            width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .searchC:focus {
+            outline: none;
+            border-color: #c2fbd7;
+            box-shadow: 0 0 0 3px rgba(194, 251, 215, 0.1);
+        }
+
+        /* Button-33 Style */
+        .button-33 {
+            background-color: #c2fbd7;
+            border-radius: 100px;
+            box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                       rgba(44, 187, 99, .15) 0 1px 2px,
+                       rgba(44, 187, 99, .15) 0 2px 4px,
+                       rgba(44, 187, 99, .15) 0 4px 8px,
+                       rgba(44, 187, 99, .15) 0 8px 16px,
+                       rgba(44, 187, 99, .15) 0 16px 32px;
+            color: #006400;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            padding: 7px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 250ms;
+            border: 0;
+            font-size: 16px;
+            font-weight: 500;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-33:hover {
+            box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                       rgba(44,187,99,.25) 0 1px 2px,
+                       rgba(44,187,99,.25) 0 2px 4px,
+                       rgba(44,187,99,.25) 0 4px 8px,
+                       rgba(44,187,99,.25) 0 8px 16px,
+                       rgba(44,187,99,.25) 0 16px 32px,
+                       0 0 20px rgba(194, 251, 215, 0.4);
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        .button-33 a {
+            color: #006400;
+            text-decoration: none;
+        }
+
+        /* Right Navigation */
+        .right-nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .right-nav a {
+            text-decoration: none;
+            color: #c2fbd7;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .right-nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(194, 251, 215, 0.4);
+        }
+
+        /* Category Menu */
+        .cat-menu-container {
+            display: flex;
+            gap: 15px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        /* Product List */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .product {
+            background-color: #1e1e1e;
+            border: 1px solid #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(194, 251, 215, 0.2);
+            border-color: #c2fbd7;
+        }
+
+        .product-image {
+            position: relative;
+            padding-bottom: 100%;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 2px solid #2a2a2a;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .product:hover .product-image {
+            border-color: #c2fbd7;
+            box-shadow: 0 0 20px rgba(194, 251, 215, 0.2);
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-info {
+            margin-top: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .product-info p {
+            font-size: 15px;
+            color: #c2fbd7;
+            margin: 5px 0;
+        }
+
+        .product-info b {
+            color: #ffffff;
+            font-size: 18px;
+            text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        }
+
+        /* Category Headers */
+        .category h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: #c2fbd7;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2a2a2a;
+            text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .my-name {
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0;
+            color: #c2fbd7;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1e1e1e;
+            min-width: 200px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .drop-menu {
+            margin: 0;
+            padding: 10px 20px;
+        }
+
+        .drop-menu:hover {
+            background-color: #2a2a2a;
+        }
+
+        .drop-menu a {
+            color: #c2fbd7;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .drop-menu a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(194, 251, 215, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main {
+                padding: 15px;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .searchC {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                padding: 15px;
+            }
+            
+            .product-list {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navigation {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .right-nav {
+                justify-content: center;
+            }
+            
+            .searchC {
+                width: 100%;
+            }
+            
+            .button-33 {
+                width: 100%;
+                margin: 10px 0 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="navigation">
+      <h1>GreenTree</h1>
+      <form method="post" action="/search">
+        <input
+          name="search"
+          type="text"
+          placeholder="Search here"
+          class="searchC"
+          id="inputField"
+        />
+        <button type="submit" class="button-33" role="button">Search</button>
+      </form>
+      <div class="right-nav">
+        <p><a href="/category">Categories</a></p>
+        <p><a href="/cart/{{user.id}}">Cart</a></p>
+
+        <div class="dropdown">
+          <p class="my-name">{{user.name}}</p>
+          <div class="dropdown-content">
+            <p class="drop-menu">
+              <a href="/profile/{{user.id}}">My Profile</a>
+            </p>
+            <p class="drop-menu">
+              <a href="/orders/{{user.id}}">My Orders</a>
+            </p>
+            <p class="drop-menu"><a href="/logout">Logout</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cat-menu-container">
+      {% for category in categories %}
+      <button type="button" class="button-33" role="button">
+        <a href="#{{category.name}}">{{category.name.replace('_', ' ').title()}}</a>
+      </button>
+      {% endfor %}
+    </div>
+
+    <div class="lower">
+      <div class="category filterDiv">
+        <h1>Recently Added Products</h1>
+        <div class="product-list">
+          {% for product in recent_products %}
+          <div class="product" name="{{product.name}}">
+            <div class="product-image">
+              <img src="/static/assets/{{product.image}}" alt="{{product.name}}" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{{product.name}}</h2>
+              <p>Best Before <b>{{product.best_before}}</b></p>
+              <p><b>${{"%.2f"|format(product.price|float)}}</b></p>
+              <button class="button-33" role="button" onclick="location.href='product/{{product.id}}'">
+                Buy Now
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="container">
+        {% for category in categories %}
+        <div class="category" id="{{category.name}}">
+          <h1>{{category.name.replace('_', ' ').title()}}</h1>
+          <div class="product-list">
+            {% for product in products %}
+            {% if product.category == category.name %}
+            <div class="product" name="{{product.name}}">
+              <div class="product-image">
+                <img src="/static/assets/{{product.image}}" alt="{{product.name}}" />
+              </div>
+              <div class="product-info">
+                <h2 class="product-name">{{product.name}}</h2>
+                <p>Best Before <b>{{product.best_before}}</b></p>
+                <p><b>${{"%.2f"|format(product.price|float)}}</b></p>
+                <button class="button-33" role="button" onclick="location.href='product/{{product.id}}'">
+                  Buy Now
+                </button>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Format dates
+    document.addEventListener('DOMContentLoaded', function() {
+      const dates = document.querySelectorAll('.product-info p b');
+      dates.forEach(dateElement => {
+        if (dateElement.parentElement.textContent.includes('Best Before')) {
+          const dateStr = dateElement.textContent.trim();
+          try {
+            const date = new Date(dateStr);
+            if (!isNaN(date)) {
+              const options = { year: 'numeric', month: 'long', day: 'numeric' };
+              dateElement.textContent = date.toLocaleDateString('en-US', options);
+            }
+          } catch (e) {
+            console.error('Error formatting date:', e);
+          }
+        }
+      });

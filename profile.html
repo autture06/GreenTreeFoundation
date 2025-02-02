@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+      body {
+        background-color: #121212;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+        position: relative;
+        padding-bottom: 80px;
+      }
+
+      .main-header {
+        background-color: #1e1e1e;
+        border-bottom: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+        padding: 20px 0;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .main-header h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .main-header h2 a {
+        color: #c2fbd7;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .main-header h2 a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(194, 251, 215, 0.5);
+      }
+
+      .card {
+        background-color: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 30px rgba(194, 251, 215, 0.2);
+        border-color: #c2fbd7;
+        transition: all 0.3s ease;
+      }
+
+      .card-body {
+        padding: 30px;
+      }
+
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .card-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #c2fbd7;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .user-info {
+        font-size: 1.1rem;
+        color: #ffffff;
+      }
+
+      .user-info p {
+        margin: 12px 0;
+        padding: 10px;
+        background-color: rgba(194, 251, 215, 0.05);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .user-info p:hover {
+        background-color: rgba(194, 251, 215, 0.1);
+        transform: translateX(5px);
+      }
+
+      .user-info strong {
+        color: #c2fbd7;
+        margin-right: 10px;
+      }
+
+      .button-33 {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                   rgba(44, 187, 99, .15) 0 1px 2px,
+                   rgba(44, 187, 99, .15) 0 2px 4px,
+                   rgba(44, 187, 99, .15) 0 4px 8px,
+                   rgba(44, 187, 99, .15) 0 8px 16px,
+                   rgba(44, 187, 99, .15) 0 16px 32px;
+        color: #006400;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        padding: 12px 30px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-33:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                   rgba(44,187,99,.25) 0 1px 2px,
+                   rgba(44,187,99,.25) 0 2px 4px,
+                   rgba(44,187,99,.25) 0 4px 8px,
+                   rgba(44,187,99,.25) 0 8px 16px,
+                   rgba(44,187,99,.25) 0 16px 32px,
+                   0 0 20px rgba(194, 251, 215, 0.4);
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .footer {
+        background-color: #1e1e1e;
+        border-top: 1px solid #2a2a2a;
+        color: #c2fbd7;
+        text-align: center;
+        padding: 15px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 -4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .card-body {
+          padding: 20px;
+        }
+        
+        .button-33 {
+          font-size: 1rem;
+          padding: 10px 20px;
+        }
+        
+        .user-info {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-header">
+      <h2><a href="/">GreenTree</a></h2>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center mb-4">User Profile</h1>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3 class="card-title">User Information</h3>
+              <div class="user-info">
+                <p><strong>Name:</strong> {{user.name}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+                <p><strong>Address:</strong> {{user.address}}</p>
+                <p><strong>Phone:</strong> {{user.phone_number}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <a href="/home" class="button-33">Go Back to Shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2025 GreenTree. All rights reserved.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,298 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The GreenTree Foundation</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="navigation">
+        <h1><a href="/">EcoVanguard</a></h1>
+
+        <div class="right-nav">
+          <p><a href="/cart/{{user.id}}">Categories</a></p>
+          <p><a href="/cart/{{user.id}}">Cart</a></p>
+
+          <div class="dropdown">
+            <p class="my-name">{{user.name}}</p>
+
+            <div class="dropdown-content">
+              <p class="drop-menu">
+                <a href="/profile/{{user.id}}">My Profile</a>
+              </p>
+              <p class="drop-menu">
+                <a href="/orders/{{user.id}}"> My Orders</a>
+              </p>
+              <p class="drop-menu"><a href="/logout">Logout</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="category">
+        <h1>Search Result for <i>{{sv}}</i></h1>
+        <div class="product-list">
+          {% for category in categories %}
+          <div class="product cat-card">
+            <div class="product-image">
+              <img src="/static/assets/{{category.image}}" alt="" />
+            </div>
+            <div class="product-info">
+              <br />
+              <h2 class="product-name">{{category.name}}</h2>
+              <br />
+              <button
+                class="add-to-cart"
+                onclick="location.href='/home#{{category.name}}'"
+              >
+                Explore
+              </button>
+            </div>
+          </div>
+          {% endfor %} {% for product in products %}
+          <div class="product" name="{{product.name}}">
+            <div class="product-image">
+              <img src="/static/assets/{{product.image }}" alt="" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{{product.name}}</h2>
+              <p>Best Before <b>{{product.best_before}}</b></p>
+              <p><b>₹{{product.price}}</b></p>
+              <button
+                class="add-to-cart search-buy"
+                onclick="location.href='http://127.0.0.1:5000/product/{{product.id}}'"
+              >
+                Buy Now
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The GreenTree Foundation</title>
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+      }
+
+      .main {
+        width: 90%;
+        max-width: 1200px;
+      }
+
+      /* Navigation bar */
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .right-nav {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+      }
+
+      a:hover {
+        color: #4caf50;
+      }
+
+      /* Dropdown */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        z-index: 1;
+        text-align: left;
+        padding: 10px;
+        min-width: 150px;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .drop-menu {
+        padding: 5px 0;
+      }
+
+      /* Category section */
+      .category {
+        margin-top: 20px;
+      }
+
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .product {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .product-info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+      }
+
+      .product-name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .add-to-cart {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 120px;
+      }
+
+      .add-to-cart:hover {
+        background: #45a049;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="navigation">
+        <a href="/">
+          <h1>GreenTree</h1>
+        </a>
+        <div class="right-nav">
+          <p><a href="/cart/{{user.id}}">Categories</a></p>
+          <p><a href="/cart/{{user.id}}">Cart</a></p>
+
+          <div class="dropdown">
+            <p class="my-name">{{user.name}}</p>
+            <div class="dropdown-content">
+              <p class="drop-menu">
+                <a href="/profile/{{user.id}}">My Profile</a>
+              </p>
+              <p class="drop-menu">
+                <a href="/orders/{{user.id}}">My Orders</a>
+              </p>
+              <p class="drop-menu"><a href="/logout">Logout</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div class="category">
+        <h1>Search Results for <i>{{sv}}</i></h1>
+        <div class="product-list">
+          {% for category in categories %}
+          <div class="product">
+            <div class="product-image">
+              <img src="/static/assets/{{category.image}}" alt="{{category.name}}" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{{category.name}}</h2>
+              <button
+                class="add-to-cart"
+                onclick="location.href='/home#{{category.name}}'"
+              >
+                Explore
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+          
+          {% for product in products %}
+          <div class="product">
+            <div class="product-image">
+              <img src="/static/assets/{{product.image}}" alt="{{product.name}}" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{{product.name}}</h2>
+              <p>Best Before: <b>{{product.best_before}}</b></p>
+              <p><b>₹{{product.price}}</b></p>
+              <button
+                class="add-to-cart"
+                onclick="location.href='/product/{{product.id}}'"
+              >
+                Buy Now
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

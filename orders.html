@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The GreenTree Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header.css') }}" />
+    <style>
+      body {
+        background-color: #121212;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main {
+        padding: 20px 0;
+        text-align: center;
+        background: #1e1e1e;
+        border-bottom: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .main h2 a {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .main h2 a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(194, 251, 215, 0.5);
+      }
+
+      .card {
+        background-color: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 30px rgba(194, 251, 215, 0.2);
+        border-color: #c2fbd7;
+        transition: all 0.3s ease;
+      }
+
+      h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .table {
+        color: #ffffff;
+      }
+
+      .table-bordered {
+        border: 1px solid #2a2a2a;
+      }
+
+      .table th, 
+      .table td {
+        vertical-align: middle;
+        border-color: #2a2a2a;
+        padding: 15px;
+      }
+
+      .thead-dark th {
+        background-color: #2a2a2a !important;
+        border-color: #2a2a2a !important;
+        color: #c2fbd7 !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+      }
+
+      .table tbody tr {
+        transition: all 0.3s ease;
+      }
+
+      .table tbody tr:hover {
+        background-color: rgba(194, 251, 215, 0.05);
+      }
+
+      .text-muted {
+        color: #888 !important;
+      }
+
+      .total-section {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px;
+        border-top: 1px solid #2a2a2a;
+      }
+
+      .button-33 {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                   rgba(44, 187, 99, .15) 0 1px 2px,
+                   rgba(44, 187, 99, .15) 0 2px 4px,
+                   rgba(44, 187, 99, .15) 0 4px 8px,
+                   rgba(44, 187, 99, .15) 0 8px 16px,
+                   rgba(44, 187, 99, .15) 0 16px 32px;
+        color: #006400;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        padding: 12px 30px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        font-weight: 500;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-33:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                   rgba(44,187,99,.25) 0 1px 2px,
+                   rgba(44,187,99,.25) 0 2px 4px,
+                   rgba(44,187,99,.25) 0 4px 8px,
+                   rgba(44,187,99,.25) 0 8px 16px,
+                   rgba(44,187,99,.25) 0 16px 32px,
+                   0 0 20px rgba(194, 251, 215, 0.4);
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .view-button {
+        background-color: rgba(194, 251, 215, 0.1);
+        color: #c2fbd7;
+        border: 1px solid #c2fbd7;
+        border-radius: 100px;
+        padding: 8px 20px;
+        transition: all 0.3s ease;
+      }
+
+      .view-button:hover {
+        background-color: #c2fbd7;
+        color: #006400;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(194, 251, 215, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .card {
+          margin: 10px;
+        }
+        
+        .table thead th,
+        .table td {
+          padding: 10px;
+        }
+        
+        .button-33 {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <h2><a href="/">GreenTree</a></h2>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <div class="card shadow-lg p-4 rounded">
+        <h1 class="text-center mb-4">My Orders</h1>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if orders %}
+                {% for order in orders %}
+                  <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>${{ "%.2f"|format(order.total|float) }}</td>
+                    <td>Will be delivered Soon.</td>
+                    <td>
+                      <a href="/ordered_products/{{ order.id }}">
+                        <button class="view-button">View</button>
+                      </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="6" class="text-center text-muted">
+                    No orders found.
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="total-section">
+          <button class="button-33" onclick="location.href='/home'">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

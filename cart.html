@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GT Foundation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/header.css') }}" />
+    <style>
+      body {
+        background-color: #121212;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+      }
+
+      .main {
+        padding: 20px 0;
+        text-align: center;
+        background: #1e1e1e;
+        border-bottom: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .main h2 a {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-decoration: none;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .main h2 a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(194, 251, 215, 0.5);
+      }
+
+      .card {
+        border-radius: 15px;
+        background-color: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .card h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: #c2fbd7;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .table {
+        color: #ffffff;
+      }
+
+      .table-bordered {
+        border: 1px solid #2a2a2a;
+      }
+
+      .table th, .table td {
+        vertical-align: middle;
+        border-color: #2a2a2a;
+        background-color: #1e1e1e;
+      }
+
+      .thead-dark th {
+        background-color: #2a2a2a !important;
+        border-color: #2a2a2a !important;
+        color: #c2fbd7 !important;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      input[type="number"] {
+        width: 60px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+      }
+
+      .button-33 {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                   rgba(44, 187, 99, .15) 0 1px 2px,
+                   rgba(44, 187, 99, .15) 0 2px 4px,
+                   rgba(44, 187, 99, .15) 0 4px 8px,
+                   rgba(44, 187, 99, .15) 0 8px 16px,
+                   rgba(44, 187, 99, .15) 0 16px 32px;
+        color: #006400;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        font-weight: 500;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-33:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                   rgba(44,187,99,.25) 0 1px 2px,
+                   rgba(44,187,99,.25) 0 2px 4px,
+                   rgba(44,187,99,.25) 0 4px 8px,
+                   rgba(44,187,99,.25) 0 8px 16px,
+                   rgba(44,187,99,.25) 0 16px 32px,
+                   0 0 20px rgba(194, 251, 215, 0.4);
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .total-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-top: 2px solid #2a2a2a;
+      }
+
+      .total-section h4 {
+        color: #c2fbd7;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .coupon-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      .coupon-section input {
+        width: 200px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid #2a2a2a;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .coupon-section input:focus {
+        outline: none;
+        border-color: #c2fbd7;
+        box-shadow: 0 0 0 3px rgba(194, 251, 215, 0.1);
+      }
+
+      .btn-remove {
+        background-color: #ff4444;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 100px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-remove:hover {
+        background-color: #cc0000;
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .total-section {
+          flex-direction: column;
+          gap: 15px;
+        }
+        
+        .coupon-section {
+          flex-direction: column;
+        }
+        
+        .coupon-section input {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <h2><a href="/">GreenTree</a></h2>
+    </div>
+
+    <div class="container mt-5 mb-5">
+      <div class="card shadow-lg p-4 rounded">
+        <h1 class="text-center mb-4">Shopping Cart</h1>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if cart_items %} 
+              {% for item in cart_items %}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ item.product_name }}</td>
+                <td>$ {{ item.price }}</td>
+                <td>
+                  <input type="number" name="quantity" value="{{ item.quantity }}" disabled />
+                </td>
+                <td>$ {{ item.price * item.quantity }}</td>
+                <td>
+                  <a href="/cart/del/{{item.cart_id}}">
+                    <button class="btn-remove">Remove</button>
+                  </a>
+                </td>
+              </tr>
+              {% endfor %} 
+              {% else %}
+              <tr>
+                <td colspan="6" class="text-center text-muted">
+                  Your cart is empty.
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="total-section">
+          <h4 id="total-amount">Total: ${{ total }}</h4>
+          {% if cart_items %}
+          <form action="/cart/place_order/{{user_id}}" method="POST">
+            <input type="hidden" name="user_id" value="{{ user_id }}" />
+            <input type="hidden" id="hidden-total" name="total" value="{{ total }}" />
+            <button type="submit" class="button-33" onclick="placeOrder()">
+              Place Order
+            </button>
+          </form>
+          {% else %}
+          <button class="button-33" onclick="location.href='/home'">
+            Let's Shop
+          </button>
+          {% endif %}
+        </div>
+
+        <div class="coupon-section">
+          <input type="text" id="coupon_code" name="coupon_code" placeholder="Enter Coupon Code" />
+          <button type="button" id="apply_coupon" class="button-33" onclick="applyCoupon()">
+            Apply Coupon
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function applyCoupon() {
+        const couponInput = document.getElementById("coupon_code");
+        const totalAmountElement = document.getElementById("hidden-total");
+        const displayTotal = document.getElementById("total-amount");
+
+        const currentTotal = parseInt(totalAmountElement.value);
+        const couponCode = couponInput.value.trim();
+
+        if (couponCode === "ECOMART25") {
+          const discountedTotal = Math.round(currentTotal * 0.75);
+          totalAmountElement.value = discountedTotal;
+          displayTotal.textContent = "Total: $" + discountedTotal;
+
+          couponInput.disabled = true;
+          document.getElementById("apply_coupon").disabled = true;
+
+          alert("Coupon applied: 25% off!");
+        } else {
+          alert("Invalid coupon code. Please try again.");
+        }
+      }
+
+      function placeOrder() {
+        alert("Order placed successfully!");
+      }
+    </script>
+  </body>
+</html>

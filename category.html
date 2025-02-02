@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GT Foundation</title>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      /* Reset default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: 'Poppins', sans-serif;
+        background-color: #121212;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      .main {
+        width: 90%;
+        max-width: 1200px;
+      }
+
+      /* Navigation bar */
+      .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #1e1e1e;
+        border-bottom: 1px solid #2a2a2a;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+      }
+
+      .right-nav {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: #c2fbd7;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.4);
+      }
+
+      /* Site Title */
+      .navigation h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 28px;
+        color: #c2fbd7;
+        margin: 0;
+        font-weight: 600;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      /* Dropdown */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .my-name {
+        cursor: pointer;
+        color: #c2fbd7;
+        font-weight: 500;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #1e1e1e;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        border: 1px solid #2a2a2a;
+        z-index: 1;
+        text-align: left;
+        padding: 10px;
+        min-width: 200px;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .drop-menu {
+        padding: 10px 20px;
+      }
+
+      .drop-menu:hover {
+        background-color: #2a2a2a;
+      }
+
+      .drop-menu a {
+        color: #c2fbd7;
+        display: block;
+        transition: all 0.3s ease;
+      }
+
+      .drop-menu a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.4);
+      }
+
+      /* Category section */
+      .category {
+        margin-top: 30px;
+      }
+
+      .category h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 24px;
+        color: #c2fbd7;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #2a2a2a;
+        text-shadow: 0 0 10px rgba(194, 251, 215, 0.3);
+      }
+
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .product {
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 255, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+
+      .product:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(194, 251, 215, 0.2);
+        border-color: #c2fbd7;
+      }
+
+      .product-image {
+        width: 100%;
+        border-radius: 12px;
+        border: 2px solid #2a2a2a;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .product:hover .product-image {
+        border-color: #c2fbd7;
+        box-shadow: 0 0 20px rgba(194, 251, 215, 0.2);
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .product-info {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0 10px 0;
+      }
+
+      .product-name {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      /* Button-33 Style */
+      .button-33 {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,
+                   rgba(44, 187, 99, .15) 0 1px 2px,
+                   rgba(44, 187, 99, .15) 0 2px 4px,
+                   rgba(44, 187, 99, .15) 0 4px 8px,
+                   rgba(44, 187, 99, .15) 0 8px 16px,
+                   rgba(44, 187, 99, .15) 0 16px 32px;
+        color: #006400;
+        cursor: pointer;
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        padding: 10px 24px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+        max-width: 150px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-33:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,
+                   rgba(44,187,99,.25) 0 1px 2px,
+                   rgba(44,187,99,.25) 0 2px 4px,
+                   rgba(44,187,99,.25) 0 4px 8px,
+                   rgba(44,187,99,.25) 0 8px 16px,
+                   rgba(44,187,99,.25) 0 16px 32px,
+                   0 0 20px rgba(194, 251, 215, 0.4);
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .navigation {
+          padding: 15px;
+          flex-wrap: wrap;
+        }
+        
+        .right-nav {
+          gap: 15px;
+        }
+        
+        .product-list {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navigation {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .right-nav {
+          margin-top: 15px;
+          justify-content: center;
+        }
+        
+        .dropdown-content {
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="navigation">
+        <a href="/">
+          <h1>GreenTree</h1>
+        </a>
+        <div class="right-nav">
+          <p><a href="/cart/{{user.id}}">Categories</a></p>
+          <p><a href="/cart/{{user.id}}">Cart</a></p>
+
+          <div class="dropdown">
+            <p class="my-name">{{user.name}}</p>
+            <div class="dropdown-content">
+              <p class="drop-menu">
+                <a href="/profile/{{user.id}}">My Profile</a>
+              </p>
+              <p class="drop-menu">
+                <a href="/orders/{{user.id}}">My Orders</a>
+              </p>
+              <p class="drop-menu"><a href="/logout">Logout</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category">
+        <h1>Categories</h1>
+        <div class="product-list">
+          {% for category in categories %}
+          <div class="product">
+            <div class="product-image">
+              <img src="/static/assets/{{category.image}}" alt="{{category.name}}" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{{category.name}}</h2>
+              <button
+                class="button-33"
+                role="button"
+                onclick="location.href='/home#{{category.name}}'"
+              >
+                Explore
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

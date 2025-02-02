@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>EcoVanguard Login</title>
+    <link rel="stylesheet" href="/static/styles/bootstrap.min.css" />
+    <style>
+      /* Adjust container scaling and remove overflow */
+      .container {
+        margin-top: 5%;
+        transform: scale(1); /* Reset scaling to 1 */
+        overflow: hidden; /* Prevent scrollbars */
+      }
+      .bg-login-image {
+        background: url("/static/ul.gif");
+        background-position: center;
+        background-size: cover;
+      }
+      /* Custom background color */
+      body {
+        background-color: #20315a; /* Replace with your desired color */
+        margin: 0; /* Remove default body margin */
+        padding: 0; /* Remove default body padding */
+        overflow: hidden; /* Prevent scrollbars */
+      }
+      /* Make the slogan smaller */
+      .slogan h4 {
+        font-size: 1.5rem; /* Adjust the size of the main slogan */
+      }
+      .slogan p {
+        font-size: 1.2rem; /* Adjust the size of the secondary slogan */
+      }
+      /* Style for "Create an Account!" link */
+      .create-account {
+        text-align: center; /* Center the text */
+        margin-top: 20px; /* Add some space above the link */
+      }
+      .create-account a {
+        font-size: 1.2rem; /* Increase font size */
+        color: #007bff; /* Default link color */
+        text-decoration: none; /* Remove underline */
+        transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+      }
+      .create-account a:hover {
+        color: #0056b3; /* Change color on hover */
+        transform: scale(1.05); /* Slightly enlarge on hover */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row fs-5 justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-10">
+          <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-lg-6 d-none d-lg-flex">
+                  <div class="flex-grow-1 bg-login-image"></div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <div class="text-center slogan">
+                      <h4 class="text-dark mb-4">The GreenTree Marketplace,</h4>
+                      <p class="text-dark mb-4">where nature shows her gratitude</p>
+                    </div>
+                    <form class="user" method="POST" action="/login">
+                      <div class="mb-3">
+                        <input
+                          class="form-control form-control-user"
+                          type="email"
+                          placeholder="Email"
+                          name="email"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <input
+                          class="form-control form-control-user"
+                          type="Password"
+                          id="exampleInputPassword"
+                          placeholder="Password"
+                          name="password"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <div class="custom-control custom-checkbox small"></div>
+                      </div>
+                      <button
+                        class="btn btn-primary d-block btn-user w-100"
+                        type="submit"
+                      >
+                        Login
+                      </button>
+                      <hr />
+                      <hr />
+                    </form>
+                    <div class="create-account">
+                      <h4>
+                        <a href="/register" class="text-decoration-none"
+                          >Create an Account!</a
+                        >
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      {% if popup %}
+      alert("You have entered invalid details!");
+      {% endif %}
+    </script>
+  </body>
+</html>
